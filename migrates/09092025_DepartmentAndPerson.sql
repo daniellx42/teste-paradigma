@@ -16,7 +16,7 @@ INSERT INTO Department (Id, Name) VALUES
 (2, 'Vendas');
 
 INSERT INTO Person (Id, Name, Salary, DepartmentId) VALUES
-(1, 'Joe', 70000, 1),
-(2, 'Henry', 80000, 2),
-(3, 'Sam', 60000, 2),
-(4, 'Max', 90000, 1);
+(1, 'Joe', 700000, 1),
+(2, 'Henry', 800000, 2),
+(3, 'Sam', 600000, 2),
+(4, 'Max', 900000, 1);
