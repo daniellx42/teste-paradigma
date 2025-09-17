@@ -26,10 +26,36 @@ class Program
         TreeNode node = new TreeNode(arr[maxIndex]);
 
         int[] leftArr = arr.Take(maxIndex).OrderByDescending(x => x).ToArray();
-        int[] rightArr = arr.Skip(maxIndex + 1).OrderByDescending(x => x).ToArray();
+        TreeNode? leftNode = null;
+        foreach (var val in leftArr)
+        {
+            if (leftNode == null)
+            {
+                leftNode = new TreeNode(val);
+                node.Left = leftNode;
+            }
+            else
+            {
+                leftNode.Left = new TreeNode(val);
+                leftNode = leftNode.Left;
+            }
+        }
 
-        node.Left = BuildTree(leftArr);
-        node.Right = BuildTree(rightArr);
+        int[] rightArr = arr.Skip(maxIndex + 1).OrderByDescending(x => x).ToArray();
+        TreeNode? rightNode = null;
+        foreach (var val in rightArr)
+        {
+            if (rightNode == null)
+            {
+                rightNode = new TreeNode(val);
+                node.Right = rightNode;
+            }
+            else
+            {
+                rightNode.Right = new TreeNode(val);
+                rightNode = rightNode.Right;
+            }
+        }
 
         return node;
     }
@@ -39,7 +65,10 @@ class Program
         if (node == null)
             return;
 
-        Console.WriteLine(indent + (isLeft ? "L-- " : "R-- ") + node.Value);
+        if (indent == "")
+            Console.WriteLine("ROOT-- " + node.Value);
+        else
+            Console.WriteLine(indent + (isLeft ? "L-- " : "R-- ") + node.Value);
 
         PrintTree(node.Left, indent + (isLeft ? "|   " : "    "), true);
         PrintTree(node.Right, indent + (isLeft ? "|   " : "    "), false);
